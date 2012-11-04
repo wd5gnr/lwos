@@ -1,0 +1,66 @@
+\hypertarget{sample_8c}{\section{sample.\-c \-File \-Reference}
+\label{sample_8c}\index{sample.\-c@{sample.\-c}}
+}
+
+
+\-Simple example of \-L\-W\-O\-S features.  
+
+
+{\ttfamily \#include $<$stdio.\-h$>$}\*
+{\ttfamily \#include \char`\"{}lwos.\-h\char`\"{}}\*
+{\ttfamily \#include $<$stdlib.\-h$>$}\*
+{\ttfamily \#include $<$time.\-h$>$}\*
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{sample_8c_a867ab10c10761b09791e2c540e162392}{task0} (\hyperlink{lwos_8h_af41b315a18a5782b8182db98ab85c5b7}{\-Task} $\ast$tcb)
+\item 
+int \hyperlink{sample_8c_a4cb8ffd2cf8ec2be24a98b3069008aba}{task1} (\hyperlink{lwos_8h_af41b315a18a5782b8182db98ab85c5b7}{\-Task} $\ast$tcb)
+\item 
+int \hyperlink{sample_8c_aedbe1fdb28af1a8adf42f31d165024fa}{task2} (\hyperlink{lwos_8h_af41b315a18a5782b8182db98ab85c5b7}{\-Task} $\ast$tcb)
+\end{DoxyCompactItemize}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+\-T\-A\-S\-K\-W\-A\-I\-T\-\_\-t \hyperlink{sample_8c_a03718ea498f637d6055cd4d7984c9a39}{task1lock} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Simple example of \-L\-W\-O\-S features. \begin{DoxyAuthor}{\-Author}
+\-Al \-Williams 
+\end{DoxyAuthor}
+\begin{DoxyDate}{\-Date}
+30 \-Oct 2012 \-To build\-: gcc -\/g -\/o sample \hyperlink{sample_8c}{sample.\-c} \hyperlink{lwos_8c}{lwos.\-c} 
+\end{DoxyDate}
+
+
+\subsection{\-Function \-Documentation}
+\hypertarget{sample_8c_a867ab10c10761b09791e2c540e162392}{\index{sample.\-c@{sample.\-c}!task0@{task0}}
+\index{task0@{task0}!sample.c@{sample.\-c}}
+\subsubsection[{task0}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf task0} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Task} $\ast$}]{tcb}
+\end{DoxyParamCaption}
+)}}\label{sample_8c_a867ab10c10761b09791e2c540e162392}
+\-This is a user task that updates the {\itshape task\-\_\-tick\/} used for sleeping. \-Note that whatever task updates the tick can't use timer wait \-In this case, the tick is simply a 1 second count \hypertarget{sample_8c_a4cb8ffd2cf8ec2be24a98b3069008aba}{\index{sample.\-c@{sample.\-c}!task1@{task1}}
+\index{task1@{task1}!sample.c@{sample.\-c}}
+\subsubsection[{task1}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf task1} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Task} $\ast$}]{tcb}
+\end{DoxyParamCaption}
+)}}\label{sample_8c_a4cb8ffd2cf8ec2be24a98b3069008aba}
+\-A simple task that prints something 10 times and then blocks \hypertarget{sample_8c_aedbe1fdb28af1a8adf42f31d165024fa}{\index{sample.\-c@{sample.\-c}!task2@{task2}}
+\index{task2@{task2}!sample.c@{sample.\-c}}
+\subsubsection[{task2}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf task2} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Task} $\ast$}]{tcb}
+\end{DoxyParamCaption}
+)}}\label{sample_8c_aedbe1fdb28af1a8adf42f31d165024fa}
+\-A simple task that prints once per second \-It also wakes up task 1 periodically 
+
+\subsection{\-Variable \-Documentation}
+\hypertarget{sample_8c_a03718ea498f637d6055cd4d7984c9a39}{\index{sample.\-c@{sample.\-c}!task1lock@{task1lock}}
+\index{task1lock@{task1lock}!sample.c@{sample.\-c}}
+\subsubsection[{task1lock}]{\setlength{\rightskip}{0pt plus 5cm}\-T\-A\-S\-K\-W\-A\-I\-T\-\_\-t {\bf task1lock} = 0}}\label{sample_8c_a03718ea498f637d6055cd4d7984c9a39}
+\-This is a wait variable (like a semaphore) \-The idea is that task1 will go as fast as possible for 10 times and then wait on the semaphore \-Then task2 will run once per second for 10 seconds and unlock the wait variable 

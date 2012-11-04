@@ -1,0 +1,60 @@
+\hypertarget{lwos_8c}{\section{lwos.\-c \-File \-Reference}
+\label{lwos_8c}\index{lwos.\-c@{lwos.\-c}}
+}
+
+
+\-Main library source for \-L\-W\-O\-S.  
+
+
+{\ttfamily \#include \char`\"{}lwos.\-h\char`\"{}}\*
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{lwos_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em \-The \-L\-W\-O\-S-\/defined main just calls {\itshape task\-\_\-init\/}. \end{DoxyCompactList}\item 
+void \hyperlink{lwos_8c_a2d5f6c88428ff65ce252e63964752e76}{task\-\_\-init} (void)
+\begin{DoxyCompactList}\small\item\em \-This function is usually called by main and forms the basic \-O\-S logic. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Main library source for \-L\-W\-O\-S. \begin{DoxyAuthor}{\-Author}
+\-Al \-Williams 
+\end{DoxyAuthor}
+\begin{DoxyDate}{\-Date}
+30 \-Oct 2012 \-Lightweight \-O\-S by \-Al \-Williams (\href{mailto:al.williams@awce.com}{\tt al.\-williams@awce.\-com}) \-A very simple \char`\"{}\-O\-S\char`\"{} written in ordinary \-C that provides cooperative multitasking and is simple enough to port to very small microcontrollers that have a \-C compiler
+\end{DoxyDate}
+\-The lwos file has its own \hyperlink{lwos_8c_a0ddf1224851353fc92bfbff6f499fa97}{main()} (although you can suppress this by defining \-L\-W\-O\-S\-\_\-\-N\-O\-M\-A\-I\-N.
+
+\-This file is part of \-L\-W\-O\-S.
+
+\-L\-W\-O\-S is free software\-: you can redistribute it and/or modify it under the terms of the \-G\-N\-U \-General \-Public \-License as published by the \-Free \-Software \-Foundation, either version 3 of the \-License, or (at your option) any later version.
+
+\-This program is distributed in the hope that it will be useful, but \-W\-I\-T\-H\-O\-U\-T \-A\-N\-Y \-W\-A\-R\-R\-A\-N\-T\-Y; without even the implied warranty of \-M\-E\-R\-C\-H\-A\-N\-T\-A\-B\-I\-L\-I\-T\-Y or \-F\-I\-T\-N\-E\-S\-S \-F\-O\-R \-A \-P\-A\-R\-T\-I\-C\-U\-L\-A\-R \-P\-U\-R\-P\-O\-S\-E. \-See the \-G\-N\-U \-General \-Public \-License for more details.
+
+\-You should have received a copy of the \-G\-N\-U \-General \-Public \-License along with this program. \-If not, see $<$\href{http://www.gnu.org/licenses/}{\tt http\-://www.\-gnu.\-org/licenses/}$>$. 
+
+\subsection{\-Function \-Documentation}
+\hypertarget{lwos_8c_a0ddf1224851353fc92bfbff6f499fa97}{\index{lwos.\-c@{lwos.\-c}!main@{main}}
+\index{main@{main}!lwos.c@{lwos.\-c}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf main} (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}}\label{lwos_8c_a0ddf1224851353fc92bfbff6f499fa97}
+
+
+\-The \-L\-W\-O\-S-\/defined main just calls {\itshape task\-\_\-init\/}. 
+
+\hypertarget{lwos_8c_a2d5f6c88428ff65ce252e63964752e76}{\index{lwos.\-c@{lwos.\-c}!task\-\_\-init@{task\-\_\-init}}
+\index{task\-\_\-init@{task\-\_\-init}!lwos.c@{lwos.\-c}}
+\subsubsection[{task\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf task\-\_\-init} (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{lwos_8c_a2d5f6c88428ff65ce252e63964752e76}
+
+
+\-This function is usually called by main and forms the basic \-O\-S logic. 
+
+\-Start \-L\-W\-O\-S -\/-\/ typically called from default main. 

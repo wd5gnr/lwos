@@ -1,0 +1,335 @@
+\hypertarget{lwos_8h}{\section{lwos.\-h \-File \-Reference}
+\label{lwos_8h}\index{lwos.\-h@{lwos.\-h}}
+}
+
+
+\-Header for \-L\-W\-O\-S programs.  
+
+
+{\ttfamily \#include $<$setjmp.\-h$>$}\*
+\subsection*{\-Data \-Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct__task}{\-\_\-task}
+\begin{DoxyCompactList}\small\item\em \-Each row of the {\itshape task\-\_\-table\/} contains data about the task. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{lwos_8h_a12e3ca8335f5d679110ad929d874a1be}{\-T\-A\-S\-K\-\_\-\-T\-A\-B\-L\-E}
+\begin{DoxyCompactList}\small\item\em \-Macro to create task table and other global vars. \end{DoxyCompactList}\item 
+\#define \hyperlink{lwos_8h_a82a4e5d2eb531e20baab4834d706dced}{\-T\-A\-S\-K\-\_\-\-D\-E\-F}(rdy, func)~\{ rdy, func, \-N\-U\-L\-L, \-N\-U\-L\-L, 0, 0, 0 \},
+\item 
+\#define \hyperlink{lwos_8h_a7314ad161e64e792b24b3ac3886a1aaf}{\-T\-A\-S\-K\-\_\-\-T\-A\-B\-L\-E\-\_\-\-E\-N\-D}
+\begin{DoxyCompactList}\small\item\em \-Macro to end the task table and define some more globals. \end{DoxyCompactList}\item 
+\#define \hyperlink{lwos_8h_ab169de39462599fcb59ff956cbbd6b5b}{task\-\_\-yield\-\_\-to}(n)~longjmp(\hyperlink{lwos_8h_a3b6d2a771ddc14909fe529c79622be1f}{task\-\_\-current}-\/$>$yieldbuf,(n)+1)
+\begin{DoxyCompactList}\small\item\em \-Yield to a specific task (or next lowest priority that is ready) \end{DoxyCompactList}\item 
+\#define \hyperlink{lwos_8h_af114a3dc72933128fbbfbf95f13df1d8}{task\-\_\-yield}()~\hyperlink{lwos_8h_ab169de39462599fcb59ff956cbbd6b5b}{task\-\_\-yield\-\_\-to}(0)
+\begin{DoxyCompactList}\small\item\em \-Yield normally. \end{DoxyCompactList}\item 
+\#define \hyperlink{lwos_8h_a22326027822d084bf9b37958576ae00c}{task\-\_\-yield\-\_\-next}()~\hyperlink{lwos_8h_ab169de39462599fcb59ff956cbbd6b5b}{task\-\_\-yield\-\_\-to}(\hyperlink{lwos_8h_a7c6e943398bf748ba97367e4b250d56f}{task\-\_\-num}+1)
+\begin{DoxyCompactList}\small\item\em \-Yield to next highest priority task that is ready. \end{DoxyCompactList}\item 
+\#define \hyperlink{lwos_8h_a97f92c459963aa372df2340eb5c22cd0}{task\-\_\-storage}(dstruct)
+\item 
+\#define \hyperlink{lwos_8h_aa8e98f2df3d1969955902e2c7f64faec}{task\-\_\-waitn}(sem, n)
+\item 
+\#define \hyperlink{lwos_8h_ad45c617c8336b61e63ab5a2aebaeb0c0}{task\-\_\-wait}(sem)~\hyperlink{lwos_8h_aa8e98f2df3d1969955902e2c7f64faec}{task\-\_\-waitn}(sem,1)
+\item 
+\#define \hyperlink{lwos_8h_a62b952fe434a16273d788c45afc0b6c8}{task\-\_\-release}(sem)~sem=0
+\item 
+\#define \hyperlink{lwos_8h_ade1c770559ecd37b9fd176fbf8e79e0b}{task\-\_\-decr}(sem)~-\/-\/sem
+\item 
+\#define \hyperlink{lwos_8h_a5fb5333b34abf3b33e9f45d70662c5d0}{task\-\_\-sleep}(ticks)
+\end{DoxyCompactItemize}
+\subsection*{\-Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{struct__task}{\-\_\-task} \hyperlink{lwos_8h_af41b315a18a5782b8182db98ab85c5b7}{\-Task}
+\begin{DoxyCompactList}\small\item\em \-Each row of the {\itshape task\-\_\-table\/} contains data about the task. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{lwos_8h_a724f9ce2351c125b3b7f6c7923822bce}{\-Task\-State} \{ \hyperlink{lwos_8h_a724f9ce2351c125b3b7f6c7923822bcea52340c1844b9c87b6c965569f21d72f1}{\-T\-A\-S\-K\-\_\-\-S\-T\-O\-P\-P\-E\-D} = -\/1, 
+\hyperlink{lwos_8h_a724f9ce2351c125b3b7f6c7923822bceaebcd951a6127c3c50a4f197b2b637793}{\-T\-A\-S\-K\-\_\-\-R\-E\-A\-D\-Y} = 0, 
+\hyperlink{lwos_8h_a724f9ce2351c125b3b7f6c7923822bceaed346ef57a002d0957c75cb3a8888025}{\-T\-A\-S\-K\-\_\-\-W\-A\-I\-T} = 1
+ \}
+\begin{DoxyCompactList}\small\item\em \-State of a task (stopped, ready, or waiting on an event) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{lwos_8h_a2d5f6c88428ff65ce252e63964752e76}{task\-\_\-init} (void)
+\begin{DoxyCompactList}\small\item\em \-Start \-L\-W\-O\-S -\/-\/ typically called from default main. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+unsigned int \hyperlink{lwos_8h_aa18a9c2409250f9916f7fea243141ef1}{task\-\_\-tick}
+\item 
+unsigned \hyperlink{lwos_8h_a48e853cd9284d45e9af1203802dad496}{task\-\_\-max}
+\begin{DoxyCompactList}\small\item\em \-Number of entries in the task table. \end{DoxyCompactList}\item 
+\hyperlink{lwos_8h_af41b315a18a5782b8182db98ab85c5b7}{\-Task} $\ast$ \hyperlink{lwos_8h_a3b6d2a771ddc14909fe529c79622be1f}{task\-\_\-current}
+\item 
+unsigned \hyperlink{lwos_8h_a7c6e943398bf748ba97367e4b250d56f}{task\-\_\-num}
+\begin{DoxyCompactList}\small\item\em \-Current running task (as an index into {\itshape task\-\_\-table\/}) \end{DoxyCompactList}\item 
+\hyperlink{lwos_8h_af41b315a18a5782b8182db98ab85c5b7}{\-Task} \hyperlink{lwos_8h_a68b9925cf8d8141dbab91504b96f9ffd}{task\-\_\-table} \mbox{[}$\,$\mbox{]}
+\begin{DoxyCompactList}\small\item\em \-The table of tasks. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Header for \-L\-W\-O\-S programs. \begin{DoxyAuthor}{\-Author}
+\-Al \-Williams 
+\end{DoxyAuthor}
+\begin{DoxyDate}{\-Date}
+30 \-Oct 2012 \-Lightweight \-O\-S by \-Al \-Williams (\href{mailto:al.williams@awce.com}{\tt al.\-williams@awce.\-com}) \-A very simple \char`\"{}\-O\-S\char`\"{} written in ordinary \-C that provides cooperative multitasking and is simple enough to port to very small microcontrollers that have a \-C compiler
+\end{DoxyDate}
+\-The lwos file has its own \hyperlink{lwos_8c_a0ddf1224851353fc92bfbff6f499fa97}{main()} (although you can suppress this by defining \-L\-W\-O\-S\-\_\-\-N\-O\-M\-A\-I\-N.
+
+\-This file is part of \-L\-W\-O\-S.
+
+\-L\-W\-O\-S is free software\-: you can redistribute it and/or modify it under the terms of the \-G\-N\-U \-Lesser \-General \-Public \-License as published by the \-Free \-Software \-Foundation, either version 3 of the \-License, or (at your option) any later version.
+
+\-This program is distributed in the hope that it will be useful, but \-W\-I\-T\-H\-O\-U\-T \-A\-N\-Y \-W\-A\-R\-R\-A\-N\-T\-Y; without even the implied warranty of \-M\-E\-R\-C\-H\-A\-N\-T\-A\-B\-I\-L\-I\-T\-Y or \-F\-I\-T\-N\-E\-S\-S \-F\-O\-R \-A \-P\-A\-R\-T\-I\-C\-U\-L\-A\-R \-P\-U\-R\-P\-O\-S\-E. \-See the \-G\-N\-U \-Lesser \-General \-Public \-License for more details.
+
+\-You should have received a copy of the \-G\-N\-U \-Lesser \-General \-Public \-License along with this program. \-If not, see $<$\href{http://www.gnu.org/licenses/}{\tt http\-://www.\-gnu.\-org/licenses/}$>$. 
+
+\subsection{\-Define \-Documentation}
+\hypertarget{lwos_8h_ade1c770559ecd37b9fd176fbf8e79e0b}{\index{lwos.\-h@{lwos.\-h}!task\-\_\-decr@{task\-\_\-decr}}
+\index{task\-\_\-decr@{task\-\_\-decr}!lwos.h@{lwos.\-h}}
+\subsubsection[{task\-\_\-decr}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf task\-\_\-decr}(
+\begin{DoxyParamCaption}
+\item[{}]{sem}
+\end{DoxyParamCaption}
+)~-\/-\/sem}}\label{lwos_8h_ade1c770559ecd37b9fd176fbf8e79e0b}
+\-Decrement a wait variable 
+\begin{DoxyParams}{\-Parameters}
+{\em sem} & -\/ \-Name of wait variable \\
+\hline
+\end{DoxyParams}
+\hypertarget{lwos_8h_a82a4e5d2eb531e20baab4834d706dced}{\index{lwos.\-h@{lwos.\-h}!\-T\-A\-S\-K\-\_\-\-D\-E\-F@{\-T\-A\-S\-K\-\_\-\-D\-E\-F}}
+\index{\-T\-A\-S\-K\-\_\-\-D\-E\-F@{\-T\-A\-S\-K\-\_\-\-D\-E\-F}!lwos.h@{lwos.\-h}}
+\subsubsection[{\-T\-A\-S\-K\-\_\-\-D\-E\-F}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-T\-A\-S\-K\-\_\-\-D\-E\-F}(
+\begin{DoxyParamCaption}
+\item[{}]{rdy, }
+\item[{}]{func}
+\end{DoxyParamCaption}
+)~\{ rdy, func, \-N\-U\-L\-L, \-N\-U\-L\-L, 0, 0, 0 \},}}\label{lwos_8h_a82a4e5d2eb531e20baab4834d706dced}
+\-Macro to define a row in the task table 
+\begin{DoxyParams}{\-Parameters}
+{\em rdy} & -\/ \-Task ready state (usually \-T\-A\-S\-K\-\_\-\-R\-E\-A\-D\-Y) \\
+\hline
+{\em func} & -\/ \-The task function \\
+\hline
+\end{DoxyParams}
+\hypertarget{lwos_8h_a62b952fe434a16273d788c45afc0b6c8}{\index{lwos.\-h@{lwos.\-h}!task\-\_\-release@{task\-\_\-release}}
+\index{task\-\_\-release@{task\-\_\-release}!lwos.h@{lwos.\-h}}
+\subsubsection[{task\-\_\-release}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf task\-\_\-release}(
+\begin{DoxyParamCaption}
+\item[{}]{sem}
+\end{DoxyParamCaption}
+)~sem=0}}\label{lwos_8h_a62b952fe434a16273d788c45afc0b6c8}
+\-Release a wait variable 
+\begin{DoxyParams}{\-Parameters}
+{\em sem} & -\/ \-Name of wait variable \\
+\hline
+\end{DoxyParams}
+\hypertarget{lwos_8h_a5fb5333b34abf3b33e9f45d70662c5d0}{\index{lwos.\-h@{lwos.\-h}!task\-\_\-sleep@{task\-\_\-sleep}}
+\index{task\-\_\-sleep@{task\-\_\-sleep}!lwos.h@{lwos.\-h}}
+\subsubsection[{task\-\_\-sleep}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf task\-\_\-sleep}(
+\begin{DoxyParamCaption}
+\item[{}]{ticks}
+\end{DoxyParamCaption}
+)}}\label{lwos_8h_a5fb5333b34abf3b33e9f45d70662c5d0}
+{\bfseries \-Value\-:}
+\begin{DoxyCode}
+{ task_current->wake=task_tick+ticks,           \
+      task_current->state=TASK_WAIT;     task_yield();   }
+\end{DoxyCode}
+\-Sleep for given tick count 
+\begin{DoxyParams}{\-Parameters}
+{\em ticks} & -\/ \-Number of ticks to wait \\
+\hline
+\end{DoxyParams}
+\hypertarget{lwos_8h_a97f92c459963aa372df2340eb5c22cd0}{\index{lwos.\-h@{lwos.\-h}!task\-\_\-storage@{task\-\_\-storage}}
+\index{task\-\_\-storage@{task\-\_\-storage}!lwos.h@{lwos.\-h}}
+\subsubsection[{task\-\_\-storage}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf task\-\_\-storage}(
+\begin{DoxyParamCaption}
+\item[{}]{dstruct}
+\end{DoxyParamCaption}
+)}}\label{lwos_8h_a97f92c459963aa372df2340eb5c22cd0}
+{\bfseries \-Value\-:}
+\begin{DoxyCode}
+(dstruct *)(!task_current->taskdata?     \
+               task_current->taskdata=calloc(1,sizeof(dstruct)): \
+               task_current->taskdata)
+\end{DoxyCode}
+\-Allocate or fetch task local 
+\begin{DoxyParams}{\-Parameters}
+{\em dstruct} & -\/ name of data type for storage \\
+\hline
+\end{DoxyParams}
+\hypertarget{lwos_8h_a12e3ca8335f5d679110ad929d874a1be}{\index{lwos.\-h@{lwos.\-h}!\-T\-A\-S\-K\-\_\-\-T\-A\-B\-L\-E@{\-T\-A\-S\-K\-\_\-\-T\-A\-B\-L\-E}}
+\index{\-T\-A\-S\-K\-\_\-\-T\-A\-B\-L\-E@{\-T\-A\-S\-K\-\_\-\-T\-A\-B\-L\-E}!lwos.h@{lwos.\-h}}
+\subsubsection[{\-T\-A\-S\-K\-\_\-\-T\-A\-B\-L\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-T\-A\-S\-K\-\_\-\-T\-A\-B\-L\-E}}}\label{lwos_8h_a12e3ca8335f5d679110ad929d874a1be}
+{\bfseries \-Value\-:}
+\begin{DoxyCode}
+Task *task_current=NULL;                        \
+  Task task_table[]= {
+\end{DoxyCode}
+
+
+\-Macro to create task table and other global vars. 
+
+\hypertarget{lwos_8h_a7314ad161e64e792b24b3ac3886a1aaf}{\index{lwos.\-h@{lwos.\-h}!\-T\-A\-S\-K\-\_\-\-T\-A\-B\-L\-E\-\_\-\-E\-N\-D@{\-T\-A\-S\-K\-\_\-\-T\-A\-B\-L\-E\-\_\-\-E\-N\-D}}
+\index{\-T\-A\-S\-K\-\_\-\-T\-A\-B\-L\-E\-\_\-\-E\-N\-D@{\-T\-A\-S\-K\-\_\-\-T\-A\-B\-L\-E\-\_\-\-E\-N\-D}!lwos.h@{lwos.\-h}}
+\subsubsection[{\-T\-A\-S\-K\-\_\-\-T\-A\-B\-L\-E\-\_\-\-E\-N\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-T\-A\-S\-K\-\_\-\-T\-A\-B\-L\-E\-\_\-\-E\-N\-D}}}\label{lwos_8h_a7314ad161e64e792b24b3ac3886a1aaf}
+{\bfseries \-Value\-:}
+\begin{DoxyCode}
+};        \
+  unsigned task_max=sizeof(task_table)/sizeof(task_table[0]);   \
+  unsigned int task_tick=0; \
+  unsigned int task_num;    \
+  Task *task_current;       \
+\end{DoxyCode}
+
+
+\-Macro to end the task table and define some more globals. 
+
+\hypertarget{lwos_8h_ad45c617c8336b61e63ab5a2aebaeb0c0}{\index{lwos.\-h@{lwos.\-h}!task\-\_\-wait@{task\-\_\-wait}}
+\index{task\-\_\-wait@{task\-\_\-wait}!lwos.h@{lwos.\-h}}
+\subsubsection[{task\-\_\-wait}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf task\-\_\-wait}(
+\begin{DoxyParamCaption}
+\item[{}]{sem}
+\end{DoxyParamCaption}
+)~{\bf task\-\_\-waitn}(sem,1)}}\label{lwos_8h_ad45c617c8336b61e63ab5a2aebaeb0c0}
+\-Wait on a flag to be set to zero 
+\begin{DoxyParams}{\-Parameters}
+{\em sem} & -\/ \-Name of wait variable \\
+\hline
+\end{DoxyParams}
+\hypertarget{lwos_8h_aa8e98f2df3d1969955902e2c7f64faec}{\index{lwos.\-h@{lwos.\-h}!task\-\_\-waitn@{task\-\_\-waitn}}
+\index{task\-\_\-waitn@{task\-\_\-waitn}!lwos.h@{lwos.\-h}}
+\subsubsection[{task\-\_\-waitn}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf task\-\_\-waitn}(
+\begin{DoxyParamCaption}
+\item[{}]{sem, }
+\item[{}]{n}
+\end{DoxyParamCaption}
+)}}\label{lwos_8h_aa8e98f2df3d1969955902e2c7f64faec}
+{\bfseries \-Value\-:}
+\begin{DoxyCode}
+{ sem=1, task_current->wait=&sem, \
+      task_current->state=TASK_WAIT; task_yield();   }
+\end{DoxyCode}
+\-Wait on a flag to be set to zero 
+\begin{DoxyParams}{\-Parameters}
+{\em sem} & -\/ \-Name of wait variable \\
+\hline
+{\em n} & -\/ \-Value to set in wait variable \\
+\hline
+\end{DoxyParams}
+\hypertarget{lwos_8h_af114a3dc72933128fbbfbf95f13df1d8}{\index{lwos.\-h@{lwos.\-h}!task\-\_\-yield@{task\-\_\-yield}}
+\index{task\-\_\-yield@{task\-\_\-yield}!lwos.h@{lwos.\-h}}
+\subsubsection[{task\-\_\-yield}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf task\-\_\-yield}(
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)~{\bf task\-\_\-yield\-\_\-to}(0)}}\label{lwos_8h_af114a3dc72933128fbbfbf95f13df1d8}
+
+
+\-Yield normally. 
+
+\hypertarget{lwos_8h_a22326027822d084bf9b37958576ae00c}{\index{lwos.\-h@{lwos.\-h}!task\-\_\-yield\-\_\-next@{task\-\_\-yield\-\_\-next}}
+\index{task\-\_\-yield\-\_\-next@{task\-\_\-yield\-\_\-next}!lwos.h@{lwos.\-h}}
+\subsubsection[{task\-\_\-yield\-\_\-next}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf task\-\_\-yield\-\_\-next}(
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)~{\bf task\-\_\-yield\-\_\-to}({\bf task\-\_\-num}+1)}}\label{lwos_8h_a22326027822d084bf9b37958576ae00c}
+
+
+\-Yield to next highest priority task that is ready. 
+
+\hypertarget{lwos_8h_ab169de39462599fcb59ff956cbbd6b5b}{\index{lwos.\-h@{lwos.\-h}!task\-\_\-yield\-\_\-to@{task\-\_\-yield\-\_\-to}}
+\index{task\-\_\-yield\-\_\-to@{task\-\_\-yield\-\_\-to}!lwos.h@{lwos.\-h}}
+\subsubsection[{task\-\_\-yield\-\_\-to}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf task\-\_\-yield\-\_\-to}(
+\begin{DoxyParamCaption}
+\item[{}]{n}
+\end{DoxyParamCaption}
+)~longjmp({\bf task\-\_\-current}-\/$>$yieldbuf,(n)+1)}}\label{lwos_8h_ab169de39462599fcb59ff956cbbd6b5b}
+
+
+\-Yield to a specific task (or next lowest priority that is ready) 
+
+
+
+\subsection{\-Typedef \-Documentation}
+\hypertarget{lwos_8h_af41b315a18a5782b8182db98ab85c5b7}{\index{lwos.\-h@{lwos.\-h}!\-Task@{\-Task}}
+\index{\-Task@{\-Task}!lwos.h@{lwos.\-h}}
+\subsubsection[{\-Task}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \-\_\-task}  {\bf \-Task}}}\label{lwos_8h_af41b315a18a5782b8182db98ab85c5b7}
+
+
+\-Each row of the {\itshape task\-\_\-table\/} contains data about the task. 
+
+
+
+\subsection{\-Enumeration \-Type \-Documentation}
+\hypertarget{lwos_8h_a724f9ce2351c125b3b7f6c7923822bce}{\index{lwos.\-h@{lwos.\-h}!\-Task\-State@{\-Task\-State}}
+\index{\-Task\-State@{\-Task\-State}!lwos.h@{lwos.\-h}}
+\subsubsection[{\-Task\-State}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf \-Task\-State}}}\label{lwos_8h_a724f9ce2351c125b3b7f6c7923822bce}
+
+
+\-State of a task (stopped, ready, or waiting on an event) 
+
+\begin{Desc}
+\item[\-Enumerator\-: ]\par
+\begin{description}
+\index{\-T\-A\-S\-K\-\_\-\-S\-T\-O\-P\-P\-E\-D@{\-T\-A\-S\-K\-\_\-\-S\-T\-O\-P\-P\-E\-D}!lwos.\-h@{lwos.\-h}}\index{lwos.\-h@{lwos.\-h}!\-T\-A\-S\-K\-\_\-\-S\-T\-O\-P\-P\-E\-D@{\-T\-A\-S\-K\-\_\-\-S\-T\-O\-P\-P\-E\-D}}\item[{\em 
+\hypertarget{lwos_8h_a724f9ce2351c125b3b7f6c7923822bcea52340c1844b9c87b6c965569f21d72f1}{\-T\-A\-S\-K\-\_\-\-S\-T\-O\-P\-P\-E\-D}\label{lwos_8h_a724f9ce2351c125b3b7f6c7923822bcea52340c1844b9c87b6c965569f21d72f1}
+}]\index{\-T\-A\-S\-K\-\_\-\-R\-E\-A\-D\-Y@{\-T\-A\-S\-K\-\_\-\-R\-E\-A\-D\-Y}!lwos.\-h@{lwos.\-h}}\index{lwos.\-h@{lwos.\-h}!\-T\-A\-S\-K\-\_\-\-R\-E\-A\-D\-Y@{\-T\-A\-S\-K\-\_\-\-R\-E\-A\-D\-Y}}\item[{\em 
+\hypertarget{lwos_8h_a724f9ce2351c125b3b7f6c7923822bceaebcd951a6127c3c50a4f197b2b637793}{\-T\-A\-S\-K\-\_\-\-R\-E\-A\-D\-Y}\label{lwos_8h_a724f9ce2351c125b3b7f6c7923822bceaebcd951a6127c3c50a4f197b2b637793}
+}]\index{\-T\-A\-S\-K\-\_\-\-W\-A\-I\-T@{\-T\-A\-S\-K\-\_\-\-W\-A\-I\-T}!lwos.\-h@{lwos.\-h}}\index{lwos.\-h@{lwos.\-h}!\-T\-A\-S\-K\-\_\-\-W\-A\-I\-T@{\-T\-A\-S\-K\-\_\-\-W\-A\-I\-T}}\item[{\em 
+\hypertarget{lwos_8h_a724f9ce2351c125b3b7f6c7923822bceaed346ef57a002d0957c75cb3a8888025}{\-T\-A\-S\-K\-\_\-\-W\-A\-I\-T}\label{lwos_8h_a724f9ce2351c125b3b7f6c7923822bceaed346ef57a002d0957c75cb3a8888025}
+}]\end{description}
+\end{Desc}
+
+
+
+\subsection{\-Function \-Documentation}
+\hypertarget{lwos_8h_a2d5f6c88428ff65ce252e63964752e76}{\index{lwos.\-h@{lwos.\-h}!task\-\_\-init@{task\-\_\-init}}
+\index{task\-\_\-init@{task\-\_\-init}!lwos.h@{lwos.\-h}}
+\subsubsection[{task\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf task\-\_\-init} (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{lwos_8h_a2d5f6c88428ff65ce252e63964752e76}
+
+
+\-Start \-L\-W\-O\-S -\/-\/ typically called from default main. 
+
+
+
+\subsection{\-Variable \-Documentation}
+\hypertarget{lwos_8h_a3b6d2a771ddc14909fe529c79622be1f}{\index{lwos.\-h@{lwos.\-h}!task\-\_\-current@{task\-\_\-current}}
+\index{task\-\_\-current@{task\-\_\-current}!lwos.h@{lwos.\-h}}
+\subsubsection[{task\-\_\-current}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Task}$\ast$ {\bf task\-\_\-current}}}\label{lwos_8h_a3b6d2a771ddc14909fe529c79622be1f}
+\-Current running task (used by many macros; also passed as an argument to the task \hypertarget{lwos_8h_a48e853cd9284d45e9af1203802dad496}{\index{lwos.\-h@{lwos.\-h}!task\-\_\-max@{task\-\_\-max}}
+\index{task\-\_\-max@{task\-\_\-max}!lwos.h@{lwos.\-h}}
+\subsubsection[{task\-\_\-max}]{\setlength{\rightskip}{0pt plus 5cm}unsigned {\bf task\-\_\-max}}}\label{lwos_8h_a48e853cd9284d45e9af1203802dad496}
+
+
+\-Number of entries in the task table. 
+
+\hypertarget{lwos_8h_a7c6e943398bf748ba97367e4b250d56f}{\index{lwos.\-h@{lwos.\-h}!task\-\_\-num@{task\-\_\-num}}
+\index{task\-\_\-num@{task\-\_\-num}!lwos.h@{lwos.\-h}}
+\subsubsection[{task\-\_\-num}]{\setlength{\rightskip}{0pt plus 5cm}unsigned {\bf task\-\_\-num}}}\label{lwos_8h_a7c6e943398bf748ba97367e4b250d56f}
+
+
+\-Current running task (as an index into {\itshape task\-\_\-table\/}) 
+
+\hypertarget{lwos_8h_a68b9925cf8d8141dbab91504b96f9ffd}{\index{lwos.\-h@{lwos.\-h}!task\-\_\-table@{task\-\_\-table}}
+\index{task\-\_\-table@{task\-\_\-table}!lwos.h@{lwos.\-h}}
+\subsubsection[{task\-\_\-table}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Task} {\bf task\-\_\-table}\mbox{[}$\,$\mbox{]}}}\label{lwos_8h_a68b9925cf8d8141dbab91504b96f9ffd}
+
+
+\-The table of tasks. 
+
+\hypertarget{lwos_8h_aa18a9c2409250f9916f7fea243141ef1}{\index{lwos.\-h@{lwos.\-h}!task\-\_\-tick@{task\-\_\-tick}}
+\index{task\-\_\-tick@{task\-\_\-tick}!lwos.h@{lwos.\-h}}
+\subsubsection[{task\-\_\-tick}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int {\bf task\-\_\-tick}}}\label{lwos_8h_aa18a9c2409250f9916f7fea243141ef1}
+\-This is set by (usually) one user task to represent time in some way (e.\-g., \# of seconds or milliseconds) 

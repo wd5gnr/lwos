@@ -1,0 +1,80 @@
+\hypertarget{struct__task}{\section{\-\_\-task \-Struct \-Reference}
+\label{struct__task}\index{\-\_\-task@{\-\_\-task}}
+}
+
+
+\-Each row of the {\itshape task\-\_\-table\/} contains data about the task.  
+
+
+
+
+{\ttfamily \#include $<$lwos.\-h$>$}
+
+\subsection*{\-Data \-Fields}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{lwos_8h_a724f9ce2351c125b3b7f6c7923822bce}{\-Task\-State} \hyperlink{struct__task_ae9205de88fa04e3d1647b531510c5850}{state}
+\begin{DoxyCompactList}\small\item\em \-Task's run state. \end{DoxyCompactList}\item 
+int($\ast$ \hyperlink{struct__task_a117951ab1cd1935d3bfe805dcaf5cd7c}{taskfunc} )(struct \hyperlink{struct__task}{\-\_\-task} $\ast$tcb)
+\begin{DoxyCompactList}\small\item\em \-Task's function. \end{DoxyCompactList}\item 
+void $\ast$ \hyperlink{struct__task_a4d013bae5c755de564a24eab1d4f412b}{taskdata}
+\begin{DoxyCompactList}\small\item\em \-Pointer to task local storage (see {\itshape task\-\_\-alloc\/}) \end{DoxyCompactList}\item 
+\-T\-A\-S\-K\-W\-A\-I\-T\-\_\-t $\ast$ \hyperlink{struct__task_ad5da6557d0c1af58ee967fee5cf48614}{wait}
+\begin{DoxyCompactList}\small\item\em \-If waiting for a semaphore, point to it. \end{DoxyCompactList}\item 
+unsigned \hyperlink{struct__task_a9089f005616ac7d832860662e7c49c0a}{wake}
+\begin{DoxyCompactList}\small\item\em \-If waiting for a tick count, here it is. \end{DoxyCompactList}\item 
+jmp\-\_\-buf \hyperlink{struct__task_a321c3ad2c00ebe17432b31e48f358823}{yieldbuf}
+\begin{DoxyCompactList}\small\item\em \-If {\itshape \-T\-A\-S\-K\-\_\-\-N\-O\-\_\-\-S\-E\-T\-J\-M\-P\/} is not defined use setjmp for embedded yield. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Each row of the {\itshape task\-\_\-table\/} contains data about the task. 
+
+\subsection{\-Field \-Documentation}
+\hypertarget{struct__task_ae9205de88fa04e3d1647b531510c5850}{\index{\-\_\-task@{\-\_\-task}!state@{state}}
+\index{state@{state}!_task@{\-\_\-task}}
+\subsubsection[{state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Task\-State} {\bf \-\_\-task\-::state}}}\label{struct__task_ae9205de88fa04e3d1647b531510c5850}
+
+
+\-Task's run state. 
+
+\hypertarget{struct__task_a4d013bae5c755de564a24eab1d4f412b}{\index{\-\_\-task@{\-\_\-task}!taskdata@{taskdata}}
+\index{taskdata@{taskdata}!_task@{\-\_\-task}}
+\subsubsection[{taskdata}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ {\bf \-\_\-task\-::taskdata}}}\label{struct__task_a4d013bae5c755de564a24eab1d4f412b}
+
+
+\-Pointer to task local storage (see {\itshape task\-\_\-alloc\/}) 
+
+\hypertarget{struct__task_a117951ab1cd1935d3bfe805dcaf5cd7c}{\index{\-\_\-task@{\-\_\-task}!taskfunc@{taskfunc}}
+\index{taskfunc@{taskfunc}!_task@{\-\_\-task}}
+\subsubsection[{taskfunc}]{\setlength{\rightskip}{0pt plus 5cm}int($\ast$ {\bf \-\_\-task\-::taskfunc})(struct {\bf \-\_\-task} $\ast$tcb)}}\label{struct__task_a117951ab1cd1935d3bfe805dcaf5cd7c}
+
+
+\-Task's function. 
+
+\hypertarget{struct__task_ad5da6557d0c1af58ee967fee5cf48614}{\index{\-\_\-task@{\-\_\-task}!wait@{wait}}
+\index{wait@{wait}!_task@{\-\_\-task}}
+\subsubsection[{wait}]{\setlength{\rightskip}{0pt plus 5cm}\-T\-A\-S\-K\-W\-A\-I\-T\-\_\-t$\ast$ {\bf \-\_\-task\-::wait}}}\label{struct__task_ad5da6557d0c1af58ee967fee5cf48614}
+
+
+\-If waiting for a semaphore, point to it. 
+
+\hypertarget{struct__task_a9089f005616ac7d832860662e7c49c0a}{\index{\-\_\-task@{\-\_\-task}!wake@{wake}}
+\index{wake@{wake}!_task@{\-\_\-task}}
+\subsubsection[{wake}]{\setlength{\rightskip}{0pt plus 5cm}unsigned {\bf \-\_\-task\-::wake}}}\label{struct__task_a9089f005616ac7d832860662e7c49c0a}
+
+
+\-If waiting for a tick count, here it is. 
+
+\hypertarget{struct__task_a321c3ad2c00ebe17432b31e48f358823}{\index{\-\_\-task@{\-\_\-task}!yieldbuf@{yieldbuf}}
+\index{yieldbuf@{yieldbuf}!_task@{\-\_\-task}}
+\subsubsection[{yieldbuf}]{\setlength{\rightskip}{0pt plus 5cm}jmp\-\_\-buf {\bf \-\_\-task\-::yieldbuf}}}\label{struct__task_a321c3ad2c00ebe17432b31e48f358823}
+
+
+\-If {\itshape \-T\-A\-S\-K\-\_\-\-N\-O\-\_\-\-S\-E\-T\-J\-M\-P\/} is not defined use setjmp for embedded yield. 
+
+
+
+\-The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{lwos_8h}{lwos.\-h}\end{DoxyCompactItemize}

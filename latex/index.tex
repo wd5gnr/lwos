@@ -1,0 +1,17 @@
+\copyright \-Copyright 2012 by \-Al \-Williams (\href{mailto:al.williams@awce.com}{\tt al.\-williams@awce.\-com}) \-Distributed under the terms of the \-G\-N\-U \-Lesser \-General \-Public \-License.\hypertarget{index_license}{}\section{\-License}\label{index_license}
+\-L\-W\-O\-S is free software\-: you can redistribute it and/or modify it under the terms of the \-G\-N\-U \-General \-Public \-License as published by the \-Free \-Software \-Foundation, either version 3 of the \-License, or (at your option) any later version.
+
+\-This program is distributed in the hope that it will be useful, but \-W\-I\-T\-H\-O\-U\-T \-A\-N\-Y \-W\-A\-R\-R\-A\-N\-T\-Y; without even the implied warranty of \-M\-E\-R\-C\-H\-A\-N\-T\-A\-B\-I\-L\-I\-T\-Y or \-F\-I\-T\-N\-E\-S\-S \-F\-O\-R \-A \-P\-A\-R\-T\-I\-C\-U\-L\-A\-R \-P\-U\-R\-P\-O\-S\-E. \-See the \-G\-N\-U \-General \-Public \-License for more details.
+
+\-You should have received a copy of the \-G\-N\-U \-General \-Public \-License along with this program. \-If not, see $<$\href{http://www.gnu.org/licenses/}{\tt http\-://www.\-gnu.\-org/licenses/}$>$.\hypertarget{index_about}{}\section{\-About}\label{index_about}
+\-This is a very simple and lightweight cooperative multitasking kernel. \-Features include\-:
+\begin{DoxyItemize}
+\item \-Prioritization
+\item \-Task local storage
+\item \-Ability for a task to directly yield to another task
+\item \-Semaphore-\/like waiting
+\item \-Ability to sleep for a certain amount of time (with some user-\/supplied support) \-Using \-L\-W\-O\-S is extremely simple. \-The file {\itshape \hyperlink{sample_8c}{sample.\-c}\/} shows a simple example. \-Minimally, you have to build a task table using the {\itshape \-T\-A\-S\-K\-T\-A\-B\-L\-E\/} macro and some task functions. \-If you want to use time-\/based sleeping you also need to provide a task to keep the scheduler's tick count (see {\itshape sleeping\/}). 
+\end{DoxyItemize}\hypertarget{index_priority}{}\section{\-Task Priority}\label{index_priority}
+\-Entries in the task table are ordered by priority with the first entry having the highest priority. \-If the first task is always ready, for example, it will always run unless it does a directed yield. \hypertarget{index_func}{}\section{\-Writing Task Functions}\label{index_func}
+\-A task function is a simple \-C function that takes a pointer to {\itshape \-Task\/} and returns an integer. \-The scheduler will run the function until it returns. \-A return of 1 allows the schedule to continue execution with the highest priority task that is ready (which may be the same function). \-A non-\/zero return will yield to a specific task (1-\/based), or the first task that is ready at that priority level or lower. \-Any wait or yield will cause the function to reenter at the start on the next execution. \-You may yield from a non-\/top-\/level function as long as \-T\-A\-S\-K\-\_\-\-N\-O\-\_\-\-S\-E\-T\-J\-M\-P is not defined. \hypertarget{index_sleeping}{}\section{\-Implementing Sleep}\label{index_sleeping}
+\-Because \-L\-W\-O\-S is portable, it depends on a user task to update the {\itshape task\-\_\-tick\/} variable. \-If you do not plan to use {\itshape task\-\_\-sleep\/} then you do not have to update {\itshape task\-\_\-tick\/}. \-More to follow 
