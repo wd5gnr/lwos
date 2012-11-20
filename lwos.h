@@ -56,7 +56,9 @@ typedef enum
 
 //! This is set by (usually) one user task
 //! to represent time in some way (e.g., # of seconds or milliseconds)
-extern unsigned int task_tick;
+
+// Note: this needs to be signed so that overflow works right
+extern int task_tick;
 
 
 //! Each row of the \a task_table contains data about the task
@@ -93,7 +95,6 @@ extern Task task_table[];
 
 //! Macro to create task table and other global vars
 #define TASK_TABLE \
-  Task *task_current=NULL;			\
   Task task_table[]= {
 
 //! Macro to define a row in the task table
@@ -107,10 +108,8 @@ extern Task task_table[];
 
 //! Macro to end the task table and define some more globals
 #define TASK_TABLE_END };	  \
-  unsigned task_max=sizeof(task_table)/sizeof(task_table[0]);	\
-  unsigned int task_tick=0; \
-  unsigned int task_num;    \
-  Task *task_current;	    \
+  unsigned task_max=sizeof(task_table)/sizeof(task_table[0]);	
+
 
 
 #ifndef TASK_NO_SETJMP

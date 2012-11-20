@@ -99,7 +99,7 @@ Data Structures</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Each row of the <em>task_table</em> contains data about the task.  <a href="struct__task.html#details">More...</a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="define-members"></a>
 Defines</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lwos_8h.html#a12e3ca8335f5d679110ad929d874a1be">TASK_TABLE</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lwos_8h.html#a12e3ca8335f5d679110ad929d874a1be">TASK_TABLE</a>&#160;&#160;&#160;<a class="el" href="lwos_8h.html#af41b315a18a5782b8182db98ab85c5b7">Task</a> <a class="el" href="lwos_8h.html#a68b9925cf8d8141dbab91504b96f9ffd">task_table</a>[]= {</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro to create task table and other global vars.  <a href="#a12e3ca8335f5d679110ad929d874a1be"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lwos_8h.html#a82a4e5d2eb531e20baab4834d706dced">TASK_DEF</a>(rdy, func)&#160;&#160;&#160;{ rdy, func, NULL, NULL, 0, 0, 0 },</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lwos_8h.html#a7314ad161e64e792b24b3ac3886a1aaf">TASK_TABLE_END</a></td></tr>
@@ -133,10 +133,12 @@ Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Start LWOS -- typically called from default main.  <a href="#a2d5f6c88428ff65ce252e63964752e76"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lwos_8h.html#aa18a9c2409250f9916f7fea243141ef1">task_tick</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lwos_8h.html#abbf01dbc8a3f47fd82f6c2afd53987ca">task_tick</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">User defined tick counter (must be signed)  <a href="#abbf01dbc8a3f47fd82f6c2afd53987ca"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lwos_8h.html#a48e853cd9284d45e9af1203802dad496">task_max</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of entries in the task table.  <a href="#a48e853cd9284d45e9af1203802dad496"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="lwos_8h.html#af41b315a18a5782b8182db98ab85c5b7">Task</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lwos_8h.html#a3b6d2a771ddc14909fe529c79622be1f">task_current</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to current task.  <a href="#a3b6d2a771ddc14909fe529c79622be1f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lwos_8h.html#a7c6e943398bf748ba97367e4b250d56f">task_num</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Current running task (as an index into <em>task_table</em>)  <a href="#a7c6e943398bf748ba97367e4b250d56f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="lwos_8h.html#af41b315a18a5782b8182db98ab85c5b7">Task</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lwos_8h.html#a68b9925cf8d8141dbab91504b96f9ffd">task_table</a> []</td></tr>
@@ -249,7 +251,7 @@ Variables</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<b>Value:</b><div class="fragment"><pre class="fragment">{ <a class="code" href="lwos_8h.html#a3b6d2a771ddc14909fe529c79622be1f">task_current</a>-&gt;<a class="code" href="struct__task.html#a9089f005616ac7d832860662e7c49c0a" title="If waiting for a tick count, here it is.">wake</a>=<a class="code" href="lwos_8h.html#aa18a9c2409250f9916f7fea243141ef1">task_tick</a>+ticks,           \
+<b>Value:</b><div class="fragment"><pre class="fragment">{ <a class="code" href="lwos_8c.html#a3b6d2a771ddc14909fe529c79622be1f" title="Pointer to current task.">task_current</a>-&gt;<a class="code" href="struct__task.html#a9089f005616ac7d832860662e7c49c0a" title="If waiting for a tick count, here it is.">wake</a>=<a class="code" href="lwos_8c.html#abbf01dbc8a3f47fd82f6c2afd53987ca" title="User defined tick counter (must be signed)">task_tick</a>+ticks,           \
       task_current-&gt;state=<a class="code" href="lwos_8h.html#a724f9ce2351c125b3b7f6c7923822bceaed346ef57a002d0957c75cb3a8888025">TASK_WAIT</a>;     <a class="code" href="lwos_8h.html#af114a3dc72933128fbbfbf95f13df1d8" title="Yield normally.">task_yield</a>();   }
 </pre></div><p>Sleep for given tick count </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
@@ -275,8 +277,8 @@ Variables</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<b>Value:</b><div class="fragment"><pre class="fragment">(dstruct *)(!<a class="code" href="lwos_8h.html#a3b6d2a771ddc14909fe529c79622be1f">task_current</a>-&gt;<a class="code" href="struct__task.html#a4d013bae5c755de564a24eab1d4f412b" title="Pointer to task local storage (see task_alloc)">taskdata</a>?     \
-               <a class="code" href="lwos_8h.html#a3b6d2a771ddc14909fe529c79622be1f">task_current</a>-&gt;<a class="code" href="struct__task.html#a4d013bae5c755de564a24eab1d4f412b" title="Pointer to task local storage (see task_alloc)">taskdata</a>=calloc(1,<span class="keyword">sizeof</span>(dstruct)): \
+<b>Value:</b><div class="fragment"><pre class="fragment">(dstruct *)(!<a class="code" href="lwos_8c.html#a3b6d2a771ddc14909fe529c79622be1f" title="Pointer to current task.">task_current</a>-&gt;<a class="code" href="struct__task.html#a4d013bae5c755de564a24eab1d4f412b" title="Pointer to task local storage (see task_alloc)">taskdata</a>?     \
+               <a class="code" href="lwos_8c.html#a3b6d2a771ddc14909fe529c79622be1f" title="Pointer to current task.">task_current</a>-&gt;<a class="code" href="struct__task.html#a4d013bae5c755de564a24eab1d4f412b" title="Pointer to task local storage (see task_alloc)">taskdata</a>=calloc(1,<span class="keyword">sizeof</span>(dstruct)): \
                task_current-&gt;taskdata)
 </pre></div><p>Allocate or fetch task local </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
@@ -293,14 +295,12 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define <a class="el" href="lwos_8h.html#a12e3ca8335f5d679110ad929d874a1be">TASK_TABLE</a></td>
+          <td class="memname">#define <a class="el" href="lwos_8h.html#a12e3ca8335f5d679110ad929d874a1be">TASK_TABLE</a>&#160;&#160;&#160;<a class="el" href="lwos_8h.html#af41b315a18a5782b8182db98ab85c5b7">Task</a> <a class="el" href="lwos_8h.html#a68b9925cf8d8141dbab91504b96f9ffd">task_table</a>[]= {</td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<b>Value:</b><div class="fragment"><pre class="fragment"><a class="code" href="struct__task.html" title="Each row of the task_table contains data about the task.">Task</a> *<a class="code" href="lwos_8h.html#a3b6d2a771ddc14909fe529c79622be1f">task_current</a>=NULL;                        \
-  Task <a class="code" href="lwos_8h.html#a68b9925cf8d8141dbab91504b96f9ffd" title="The table of tasks.">task_table</a>[]= {
-</pre></div>
+
 <p>Macro to create task table and other global vars. </p>
 
 </div>
@@ -316,10 +316,7 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 <b>Value:</b><div class="fragment"><pre class="fragment">};        \
-  unsigned <a class="code" href="lwos_8h.html#a48e853cd9284d45e9af1203802dad496" title="Number of entries in the task table.">task_max</a>=<span class="keyword">sizeof</span>(<a class="code" href="lwos_8h.html#a68b9925cf8d8141dbab91504b96f9ffd" title="The table of tasks.">task_table</a>)/<span class="keyword">sizeof</span>(task_table[0]);   \
-  unsigned <span class="keywordtype">int</span> <a class="code" href="lwos_8h.html#aa18a9c2409250f9916f7fea243141ef1">task_tick</a>=0; \
-  unsigned <span class="keywordtype">int</span> <a class="code" href="lwos_8h.html#a7c6e943398bf748ba97367e4b250d56f" title="Current running task (as an index into task_table)">task_num</a>;    \
-  Task *<a class="code" href="lwos_8h.html#a3b6d2a771ddc14909fe529c79622be1f">task_current</a>;       \
+  unsigned <a class="code" href="lwos_8h.html#a48e853cd9284d45e9af1203802dad496" title="Number of entries in the task table.">task_max</a>=<span class="keyword">sizeof</span>(<a class="code" href="lwos_8h.html#a68b9925cf8d8141dbab91504b96f9ffd" title="The table of tasks.">task_table</a>)/<span class="keyword">sizeof</span>(task_table[0]);
 </pre></div>
 <p>Macro to end the task table and define some more globals. </p>
 
@@ -373,7 +370,7 @@ Variables</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<b>Value:</b><div class="fragment"><pre class="fragment">{ sem=1, <a class="code" href="lwos_8h.html#a3b6d2a771ddc14909fe529c79622be1f">task_current</a>-&gt;<a class="code" href="struct__task.html#ad5da6557d0c1af58ee967fee5cf48614" title="If waiting for a semaphore, point to it.">wait</a>=&amp;sem, \
+<b>Value:</b><div class="fragment"><pre class="fragment">{ sem=1, <a class="code" href="lwos_8c.html#a3b6d2a771ddc14909fe529c79622be1f" title="Pointer to current task.">task_current</a>-&gt;<a class="code" href="struct__task.html#ad5da6557d0c1af58ee967fee5cf48614" title="If waiting for a semaphore, point to it.">wait</a>=&amp;sem, \
       task_current-&gt;state=<a class="code" href="lwos_8h.html#a724f9ce2351c125b3b7f6c7923822bceaed346ef57a002d0957c75cb3a8888025">TASK_WAIT</a>; <a class="code" href="lwos_8h.html#af114a3dc72933128fbbfbf95f13df1d8" title="Yield normally.">task_yield</a>();   }
 </pre></div><p>Wait on a flag to be set to zero </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
@@ -514,6 +511,8 @@ Variables</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Pointer to current task. </p>
 <p>Current running task (used by many macros; also passed as an argument to the task </p>
 
 </div>
@@ -563,16 +562,18 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aa18a9c2409250f9916f7fea243141ef1"></a><!-- doxytag: member="lwos.h::task_tick" ref="aa18a9c2409250f9916f7fea243141ef1" args="" -->
+<a class="anchor" id="abbf01dbc8a3f47fd82f6c2afd53987ca"></a><!-- doxytag: member="lwos.h::task_tick" ref="abbf01dbc8a3f47fd82f6c2afd53987ca" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned int <a class="el" href="lwos_8h.html#aa18a9c2409250f9916f7fea243141ef1">task_tick</a></td>
+          <td class="memname">int <a class="el" href="lwos_8h.html#abbf01dbc8a3f47fd82f6c2afd53987ca">task_tick</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>User defined tick counter (must be signed) </p>
 <p>This is set by (usually) one user task to represent time in some way (e.g., # of seconds or milliseconds) </p>
 
 </div>
@@ -595,7 +596,7 @@ Variables</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 4 2012 09:48:55 for Lightweight OS (LWOS) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 19 2012 22:30:11 for Lightweight OS (LWOS) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

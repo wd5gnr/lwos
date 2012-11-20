@@ -6,6 +6,7 @@
 \-Main library source for \-L\-W\-O\-S.  
 
 
+{\ttfamily \#include $<$stdlib.\-h$>$}\*
 {\ttfamily \#include \char`\"{}lwos.\-h\char`\"{}}\*
 \subsection*{\-Functions}
 \begin{DoxyCompactItemize}
@@ -14,6 +15,15 @@ int \hyperlink{lwos_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char 
 \begin{DoxyCompactList}\small\item\em \-The \-L\-W\-O\-S-\/defined main just calls {\itshape task\-\_\-init\/}. \end{DoxyCompactList}\item 
 void \hyperlink{lwos_8c_a2d5f6c88428ff65ce252e63964752e76}{task\-\_\-init} (void)
 \begin{DoxyCompactList}\small\item\em \-This function is usually called by main and forms the basic \-O\-S logic. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{lwos_8c_abbf01dbc8a3f47fd82f6c2afd53987ca}{task\-\_\-tick} = 0
+\begin{DoxyCompactList}\small\item\em \-User defined tick counter (must be signed) \end{DoxyCompactList}\item 
+unsigned int \hyperlink{lwos_8c_a8934693a5bbb067fec2dc3325430d1f9}{task\-\_\-num}
+\begin{DoxyCompactList}\small\item\em \-Current task number. \end{DoxyCompactList}\item 
+\hyperlink{lwos_8h_af41b315a18a5782b8182db98ab85c5b7}{\-Task} $\ast$ \hyperlink{lwos_8c_a3b6d2a771ddc14909fe529c79622be1f}{task\-\_\-current} = \-N\-U\-L\-L
+\begin{DoxyCompactList}\small\item\em \-Pointer to current task. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{\-Detailed \-Description}
@@ -58,3 +68,27 @@ void \hyperlink{lwos_8c_a2d5f6c88428ff65ce252e63964752e76}{task\-\_\-init} (void
 \-This function is usually called by main and forms the basic \-O\-S logic. 
 
 \-Start \-L\-W\-O\-S -\/-\/ typically called from default main. 
+
+\subsection{\-Variable \-Documentation}
+\hypertarget{lwos_8c_a3b6d2a771ddc14909fe529c79622be1f}{\index{lwos.\-c@{lwos.\-c}!task\-\_\-current@{task\-\_\-current}}
+\index{task\-\_\-current@{task\-\_\-current}!lwos.c@{lwos.\-c}}
+\subsubsection[{task\-\_\-current}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Task}$\ast$ {\bf task\-\_\-current} = \-N\-U\-L\-L}}\label{lwos_8c_a3b6d2a771ddc14909fe529c79622be1f}
+
+
+\-Pointer to current task. 
+
+\-Current running task (used by many macros; also passed as an argument to the task \hypertarget{lwos_8c_a8934693a5bbb067fec2dc3325430d1f9}{\index{lwos.\-c@{lwos.\-c}!task\-\_\-num@{task\-\_\-num}}
+\index{task\-\_\-num@{task\-\_\-num}!lwos.c@{lwos.\-c}}
+\subsubsection[{task\-\_\-num}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int {\bf task\-\_\-num}}}\label{lwos_8c_a8934693a5bbb067fec2dc3325430d1f9}
+
+
+\-Current task number. 
+
+\-Current running task (as an index into {\itshape task\-\_\-table\/}) \hypertarget{lwos_8c_abbf01dbc8a3f47fd82f6c2afd53987ca}{\index{lwos.\-c@{lwos.\-c}!task\-\_\-tick@{task\-\_\-tick}}
+\index{task\-\_\-tick@{task\-\_\-tick}!lwos.c@{lwos.\-c}}
+\subsubsection[{task\-\_\-tick}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf task\-\_\-tick} = 0}}\label{lwos_8c_abbf01dbc8a3f47fd82f6c2afd53987ca}
+
+
+\-User defined tick counter (must be signed) 
+
+\-This is set by (usually) one user task to represent time in some way (e.\-g., \# of seconds or milliseconds) 

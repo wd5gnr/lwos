@@ -100,80 +100,79 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00054"></a><a class="code" href="lwos_8h.html#a724f9ce2351c125b3b7f6c7923822bceaed346ef57a002d0957c75cb3a8888025">00054</a>     <a class="code" href="lwos_8h.html#a724f9ce2351c125b3b7f6c7923822bceaed346ef57a002d0957c75cb3a8888025">TASK_WAIT</a>=1
 <a name="l00055"></a>00055   } <a class="code" href="lwos_8h.html#a724f9ce2351c125b3b7f6c7923822bce" title="State of a task (stopped, ready, or waiting on an event)">TaskState</a>;
 <a name="l00056"></a>00056 
-<a name="l00059"></a>00059 <span class="keyword">extern</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="lwos_8h.html#aa18a9c2409250f9916f7fea243141ef1">task_tick</a>;
-<a name="l00060"></a>00060 
-<a name="l00061"></a>00061 
-<a name="l00063"></a><a class="code" href="struct__task.html">00063</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct__task.html" title="Each row of the task_table contains data about the task.">_task</a>
-<a name="l00064"></a>00064 {
-<a name="l00066"></a><a class="code" href="struct__task.html#ae9205de88fa04e3d1647b531510c5850">00066</a>   <a class="code" href="lwos_8h.html#a724f9ce2351c125b3b7f6c7923822bce" title="State of a task (stopped, ready, or waiting on an event)">TaskState</a> <a class="code" href="struct__task.html#ae9205de88fa04e3d1647b531510c5850" title="Task&#39;s run state.">state</a>;  
-<a name="l00068"></a><a class="code" href="struct__task.html#a117951ab1cd1935d3bfe805dcaf5cd7c">00068</a>   int (*<a class="code" href="struct__task.html#a117951ab1cd1935d3bfe805dcaf5cd7c" title="Task&#39;s function.">taskfunc</a>)(<span class="keyword">struct </span><a class="code" href="struct__task.html" title="Each row of the task_table contains data about the task.">_task</a> *tcb);  
-<a name="l00070"></a><a class="code" href="struct__task.html#a4d013bae5c755de564a24eab1d4f412b">00070</a>   <span class="keywordtype">void</span> *<a class="code" href="struct__task.html#a4d013bae5c755de564a24eab1d4f412b" title="Pointer to task local storage (see task_alloc)">taskdata</a>;  
-<a name="l00072"></a><a class="code" href="struct__task.html#ad5da6557d0c1af58ee967fee5cf48614">00072</a>   TASKWAIT_t *<a class="code" href="struct__task.html#ad5da6557d0c1af58ee967fee5cf48614" title="If waiting for a semaphore, point to it.">wait</a>;  
-<a name="l00074"></a><a class="code" href="struct__task.html#a9089f005616ac7d832860662e7c49c0a">00074</a>   <span class="keywordtype">unsigned</span> <a class="code" href="struct__task.html#a9089f005616ac7d832860662e7c49c0a" title="If waiting for a tick count, here it is.">wake</a>;    
-<a name="l00075"></a>00075 <span class="preprocessor">#ifndef TASK_NO_SETJMP</span>
-<a name="l00076"></a>00076 <span class="preprocessor"></span>
-<a name="l00077"></a><a class="code" href="struct__task.html#a321c3ad2c00ebe17432b31e48f358823">00077</a>   jmp_buf <a class="code" href="struct__task.html#a321c3ad2c00ebe17432b31e48f358823" title="If TASK_NO_SETJMP is not defined use setjmp for embedded yield.">yieldbuf</a>;
-<a name="l00078"></a>00078 <span class="preprocessor">#endif  </span>
-<a name="l00079"></a>00079 <span class="preprocessor"></span>} <a class="code" href="lwos_8h.html#af41b315a18a5782b8182db98ab85c5b7" title="Each row of the task_table contains data about the task.">Task</a>;
-<a name="l00080"></a>00080 
-<a name="l00082"></a>00082 <span class="keyword">extern</span> <span class="keywordtype">unsigned</span> <a class="code" href="lwos_8h.html#a48e853cd9284d45e9af1203802dad496" title="Number of entries in the task table.">task_max</a>;
-<a name="l00083"></a>00083 
-<a name="l00086"></a>00086 <span class="keyword">extern</span> <a class="code" href="struct__task.html" title="Each row of the task_table contains data about the task.">Task</a> *<a class="code" href="lwos_8h.html#a3b6d2a771ddc14909fe529c79622be1f">task_current</a>;
-<a name="l00087"></a>00087 
-<a name="l00089"></a>00089 <span class="keyword">extern</span> <span class="keywordtype">unsigned</span> <a class="code" href="lwos_8h.html#a7c6e943398bf748ba97367e4b250d56f" title="Current running task (as an index into task_table)">task_num</a>;
-<a name="l00090"></a>00090 
-<a name="l00092"></a>00092 <span class="keyword">extern</span> <a class="code" href="struct__task.html" title="Each row of the task_table contains data about the task.">Task</a> <a class="code" href="lwos_8h.html#a68b9925cf8d8141dbab91504b96f9ffd" title="The table of tasks.">task_table</a>[];
-<a name="l00093"></a>00093 
-<a name="l00095"></a><a class="code" href="lwos_8h.html#a12e3ca8335f5d679110ad929d874a1be">00095</a> <span class="preprocessor">#define TASK_TABLE \</span>
-<a name="l00096"></a>00096 <span class="preprocessor">  Task *task_current=NULL;                      \</span>
-<a name="l00097"></a>00097 <span class="preprocessor">  Task task_table[]= {</span>
-<a name="l00098"></a>00098 <span class="preprocessor"></span>
-<a name="l00102"></a>00102 <span class="preprocessor">#ifndef TASK_NO_SETJMP</span>
-<a name="l00103"></a><a class="code" href="lwos_8h.html#a82a4e5d2eb531e20baab4834d706dced">00103</a> <span class="preprocessor"></span><span class="preprocessor">#define TASK_DEF(rdy,func) { rdy, func, NULL, NULL, 0, 0, 0 },</span>
-<a name="l00104"></a>00104 <span class="preprocessor"></span><span class="preprocessor">#else</span>
-<a name="l00105"></a>00105 <span class="preprocessor"></span><span class="preprocessor">#define TASK_DEF(rdy,func) { rdy, func, NULL, NULL, 0, 0},</span>
-<a name="l00106"></a>00106 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00107"></a>00107 <span class="preprocessor"></span>
-<a name="l00109"></a><a class="code" href="lwos_8h.html#a7314ad161e64e792b24b3ac3886a1aaf">00109</a> <span class="preprocessor">#define TASK_TABLE_END };         \</span>
-<a name="l00110"></a>00110 <span class="preprocessor">  unsigned task_max=sizeof(task_table)/sizeof(task_table[0]);   \</span>
-<a name="l00111"></a>00111 <span class="preprocessor">  unsigned int task_tick=0; \</span>
-<a name="l00112"></a>00112 <span class="preprocessor">  unsigned int task_num;    \</span>
-<a name="l00113"></a>00113 <span class="preprocessor">  Task *task_current;       \</span>
-<a name="l00114"></a>00114 <span class="preprocessor"></span>
-<a name="l00115"></a>00115 <span class="preprocessor"></span>
-<a name="l00116"></a>00116 <span class="preprocessor">#ifndef TASK_NO_SETJMP</span>
-<a name="l00117"></a>00117 <span class="preprocessor"></span>
-<a name="l00118"></a><a class="code" href="lwos_8h.html#ab169de39462599fcb59ff956cbbd6b5b">00118</a> <span class="preprocessor">#define task_yield_to(n) longjmp(task_current-&gt;yieldbuf,(n)+1)</span>
-<a name="l00119"></a>00119 <span class="preprocessor"></span>
-<a name="l00121"></a><a class="code" href="lwos_8h.html#af114a3dc72933128fbbfbf95f13df1d8">00121</a> <span class="preprocessor">#define task_yield() task_yield_to(0)</span>
-<a name="l00122"></a>00122 <span class="preprocessor"></span>
-<a name="l00124"></a><a class="code" href="lwos_8h.html#a22326027822d084bf9b37958576ae00c">00124</a> <span class="preprocessor">#define task_yield_next() task_yield_to(task_num+1)</span>
-<a name="l00125"></a>00125 <span class="preprocessor"></span><span class="preprocessor">#else</span>
-<a name="l00126"></a>00126 <span class="preprocessor"></span><span class="preprocessor">#define task_yield() return 1</span>
-<a name="l00127"></a>00127 <span class="preprocessor"></span><span class="preprocessor">#define task_yield_to(n) return ((n)+1</span>
-<a name="l00128"></a>00128 <span class="preprocessor"></span><span class="preprocessor">#define task_yield_next() return (task_num+2)</span>
-<a name="l00129"></a>00129 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00130"></a>00130 <span class="preprocessor"></span>
-<a name="l00133"></a><a class="code" href="lwos_8h.html#a97f92c459963aa372df2340eb5c22cd0">00133</a> <span class="preprocessor">#define task_storage(dstruct) (dstruct *)(!task_current-&gt;taskdata?       \</span>
-<a name="l00134"></a>00134 <span class="preprocessor">               task_current-&gt;taskdata=calloc(1,sizeof(dstruct)): \</span>
-<a name="l00135"></a>00135 <span class="preprocessor">               task_current-&gt;taskdata)</span>
-<a name="l00136"></a>00136 <span class="preprocessor"></span>  
-<a name="l00140"></a><a class="code" href="lwos_8h.html#aa8e98f2df3d1969955902e2c7f64faec">00140</a> <span class="preprocessor">#define task_waitn(sem,n) { sem=1, task_current-&gt;wait=&amp;sem, \</span>
-<a name="l00141"></a>00141 <span class="preprocessor">      task_current-&gt;state=TASK_WAIT; task_yield();   }</span>
-<a name="l00142"></a>00142 <span class="preprocessor"></span>  
-<a name="l00145"></a><a class="code" href="lwos_8h.html#ad45c617c8336b61e63ab5a2aebaeb0c0">00145</a> <span class="preprocessor">#define task_wait(sem) task_waitn(sem,1)</span>
-<a name="l00146"></a>00146 <span class="preprocessor"></span>
-<a name="l00147"></a>00147    
-<a name="l00150"></a><a class="code" href="lwos_8h.html#a62b952fe434a16273d788c45afc0b6c8">00150</a> <span class="preprocessor">#define task_release(sem) sem=0  </span>
-<a name="l00151"></a>00151 <span class="preprocessor"></span>
-<a name="l00154"></a><a class="code" href="lwos_8h.html#ade1c770559ecd37b9fd176fbf8e79e0b">00154</a> <span class="preprocessor">#define task_decr(sem) --sem</span>
-<a name="l00155"></a>00155 <span class="preprocessor"></span>
-<a name="l00158"></a><a class="code" href="lwos_8h.html#a5fb5333b34abf3b33e9f45d70662c5d0">00158</a> <span class="preprocessor">#define task_sleep(ticks) { task_current-&gt;wake=task_tick+ticks,         \</span>
-<a name="l00159"></a>00159 <span class="preprocessor">      task_current-&gt;state=TASK_WAIT;     task_yield();   }</span>
-<a name="l00160"></a>00160 <span class="preprocessor"></span>
-<a name="l00162"></a>00162 <span class="keywordtype">void</span> <a class="code" href="lwos_8c.html#a2d5f6c88428ff65ce252e63964752e76" title="This function is usually called by main and forms the basic OS logic.">task_init</a>(<span class="keywordtype">void</span>);
-<a name="l00163"></a>00163 
-<a name="l00164"></a>00164 <span class="preprocessor">#endif</span>
+<a name="l00059"></a>00059 
+<a name="l00060"></a>00060 <span class="comment">// Note: this needs to be signed so that overflow works right</span>
+<a name="l00061"></a>00061 <span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="lwos_8c.html#abbf01dbc8a3f47fd82f6c2afd53987ca" title="User defined tick counter (must be signed)">task_tick</a>;
+<a name="l00062"></a>00062 
+<a name="l00063"></a>00063 
+<a name="l00065"></a><a class="code" href="struct__task.html">00065</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct__task.html" title="Each row of the task_table contains data about the task.">_task</a>
+<a name="l00066"></a>00066 {
+<a name="l00068"></a><a class="code" href="struct__task.html#ae9205de88fa04e3d1647b531510c5850">00068</a>   <a class="code" href="lwos_8h.html#a724f9ce2351c125b3b7f6c7923822bce" title="State of a task (stopped, ready, or waiting on an event)">TaskState</a> <a class="code" href="struct__task.html#ae9205de88fa04e3d1647b531510c5850" title="Task&#39;s run state.">state</a>;  
+<a name="l00070"></a><a class="code" href="struct__task.html#a117951ab1cd1935d3bfe805dcaf5cd7c">00070</a>   int (*<a class="code" href="struct__task.html#a117951ab1cd1935d3bfe805dcaf5cd7c" title="Task&#39;s function.">taskfunc</a>)(<span class="keyword">struct </span><a class="code" href="struct__task.html" title="Each row of the task_table contains data about the task.">_task</a> *tcb);  
+<a name="l00072"></a><a class="code" href="struct__task.html#a4d013bae5c755de564a24eab1d4f412b">00072</a>   <span class="keywordtype">void</span> *<a class="code" href="struct__task.html#a4d013bae5c755de564a24eab1d4f412b" title="Pointer to task local storage (see task_alloc)">taskdata</a>;  
+<a name="l00074"></a><a class="code" href="struct__task.html#ad5da6557d0c1af58ee967fee5cf48614">00074</a>   TASKWAIT_t *<a class="code" href="struct__task.html#ad5da6557d0c1af58ee967fee5cf48614" title="If waiting for a semaphore, point to it.">wait</a>;  
+<a name="l00076"></a><a class="code" href="struct__task.html#a9089f005616ac7d832860662e7c49c0a">00076</a>   <span class="keywordtype">unsigned</span> <a class="code" href="struct__task.html#a9089f005616ac7d832860662e7c49c0a" title="If waiting for a tick count, here it is.">wake</a>;    
+<a name="l00077"></a>00077 <span class="preprocessor">#ifndef TASK_NO_SETJMP</span>
+<a name="l00078"></a>00078 <span class="preprocessor"></span>
+<a name="l00079"></a><a class="code" href="struct__task.html#a321c3ad2c00ebe17432b31e48f358823">00079</a>   jmp_buf <a class="code" href="struct__task.html#a321c3ad2c00ebe17432b31e48f358823" title="If TASK_NO_SETJMP is not defined use setjmp for embedded yield.">yieldbuf</a>;
+<a name="l00080"></a>00080 <span class="preprocessor">#endif  </span>
+<a name="l00081"></a>00081 <span class="preprocessor"></span>} <a class="code" href="lwos_8h.html#af41b315a18a5782b8182db98ab85c5b7" title="Each row of the task_table contains data about the task.">Task</a>;
+<a name="l00082"></a>00082 
+<a name="l00084"></a>00084 <span class="keyword">extern</span> <span class="keywordtype">unsigned</span> <a class="code" href="lwos_8h.html#a48e853cd9284d45e9af1203802dad496" title="Number of entries in the task table.">task_max</a>;
+<a name="l00085"></a>00085 
+<a name="l00088"></a>00088 <span class="keyword">extern</span> <a class="code" href="struct__task.html" title="Each row of the task_table contains data about the task.">Task</a> *<a class="code" href="lwos_8c.html#a3b6d2a771ddc14909fe529c79622be1f" title="Pointer to current task.">task_current</a>;
+<a name="l00089"></a>00089 
+<a name="l00091"></a>00091 <span class="keyword">extern</span> <span class="keywordtype">unsigned</span> <a class="code" href="lwos_8c.html#a8934693a5bbb067fec2dc3325430d1f9" title="Current task number.">task_num</a>;
+<a name="l00092"></a>00092 
+<a name="l00094"></a>00094 <span class="keyword">extern</span> <a class="code" href="struct__task.html" title="Each row of the task_table contains data about the task.">Task</a> <a class="code" href="lwos_8h.html#a68b9925cf8d8141dbab91504b96f9ffd" title="The table of tasks.">task_table</a>[];
+<a name="l00095"></a>00095 
+<a name="l00097"></a><a class="code" href="lwos_8h.html#a12e3ca8335f5d679110ad929d874a1be">00097</a> <span class="preprocessor">#define TASK_TABLE \</span>
+<a name="l00098"></a>00098 <span class="preprocessor">  Task task_table[]= {</span>
+<a name="l00099"></a>00099 <span class="preprocessor"></span>
+<a name="l00103"></a>00103 <span class="preprocessor">#ifndef TASK_NO_SETJMP</span>
+<a name="l00104"></a><a class="code" href="lwos_8h.html#a82a4e5d2eb531e20baab4834d706dced">00104</a> <span class="preprocessor"></span><span class="preprocessor">#define TASK_DEF(rdy,func) { rdy, func, NULL, NULL, 0, 0, 0 },</span>
+<a name="l00105"></a>00105 <span class="preprocessor"></span><span class="preprocessor">#else</span>
+<a name="l00106"></a>00106 <span class="preprocessor"></span><span class="preprocessor">#define TASK_DEF(rdy,func) { rdy, func, NULL, NULL, 0, 0},</span>
+<a name="l00107"></a>00107 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00108"></a>00108 <span class="preprocessor"></span>
+<a name="l00110"></a><a class="code" href="lwos_8h.html#a7314ad161e64e792b24b3ac3886a1aaf">00110</a> <span class="preprocessor">#define TASK_TABLE_END };         \</span>
+<a name="l00111"></a>00111 <span class="preprocessor">  unsigned task_max=sizeof(task_table)/sizeof(task_table[0]);   </span>
+<a name="l00112"></a>00112 <span class="preprocessor"></span>
+<a name="l00113"></a>00113 
+<a name="l00114"></a>00114 
+<a name="l00115"></a>00115 <span class="preprocessor">#ifndef TASK_NO_SETJMP</span>
+<a name="l00116"></a>00116 <span class="preprocessor"></span>
+<a name="l00117"></a><a class="code" href="lwos_8h.html#ab169de39462599fcb59ff956cbbd6b5b">00117</a> <span class="preprocessor">#define task_yield_to(n) longjmp(task_current-&gt;yieldbuf,(n)+1)</span>
+<a name="l00118"></a>00118 <span class="preprocessor"></span>
+<a name="l00120"></a><a class="code" href="lwos_8h.html#af114a3dc72933128fbbfbf95f13df1d8">00120</a> <span class="preprocessor">#define task_yield() task_yield_to(0)</span>
+<a name="l00121"></a>00121 <span class="preprocessor"></span>
+<a name="l00123"></a><a class="code" href="lwos_8h.html#a22326027822d084bf9b37958576ae00c">00123</a> <span class="preprocessor">#define task_yield_next() task_yield_to(task_num+1)</span>
+<a name="l00124"></a>00124 <span class="preprocessor"></span><span class="preprocessor">#else</span>
+<a name="l00125"></a>00125 <span class="preprocessor"></span><span class="preprocessor">#define task_yield() return 1</span>
+<a name="l00126"></a>00126 <span class="preprocessor"></span><span class="preprocessor">#define task_yield_to(n) return ((n)+1</span>
+<a name="l00127"></a>00127 <span class="preprocessor"></span><span class="preprocessor">#define task_yield_next() return (task_num+2)</span>
+<a name="l00128"></a>00128 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00129"></a>00129 <span class="preprocessor"></span>
+<a name="l00132"></a><a class="code" href="lwos_8h.html#a97f92c459963aa372df2340eb5c22cd0">00132</a> <span class="preprocessor">#define task_storage(dstruct) (dstruct *)(!task_current-&gt;taskdata?       \</span>
+<a name="l00133"></a>00133 <span class="preprocessor">               task_current-&gt;taskdata=calloc(1,sizeof(dstruct)): \</span>
+<a name="l00134"></a>00134 <span class="preprocessor">               task_current-&gt;taskdata)</span>
+<a name="l00135"></a>00135 <span class="preprocessor"></span>  
+<a name="l00139"></a><a class="code" href="lwos_8h.html#aa8e98f2df3d1969955902e2c7f64faec">00139</a> <span class="preprocessor">#define task_waitn(sem,n) { sem=1, task_current-&gt;wait=&amp;sem, \</span>
+<a name="l00140"></a>00140 <span class="preprocessor">      task_current-&gt;state=TASK_WAIT; task_yield();   }</span>
+<a name="l00141"></a>00141 <span class="preprocessor"></span>  
+<a name="l00144"></a><a class="code" href="lwos_8h.html#ad45c617c8336b61e63ab5a2aebaeb0c0">00144</a> <span class="preprocessor">#define task_wait(sem) task_waitn(sem,1)</span>
+<a name="l00145"></a>00145 <span class="preprocessor"></span>
+<a name="l00146"></a>00146    
+<a name="l00149"></a><a class="code" href="lwos_8h.html#a62b952fe434a16273d788c45afc0b6c8">00149</a> <span class="preprocessor">#define task_release(sem) sem=0  </span>
+<a name="l00150"></a>00150 <span class="preprocessor"></span>
+<a name="l00153"></a><a class="code" href="lwos_8h.html#ade1c770559ecd37b9fd176fbf8e79e0b">00153</a> <span class="preprocessor">#define task_decr(sem) --sem</span>
+<a name="l00154"></a>00154 <span class="preprocessor"></span>
+<a name="l00157"></a><a class="code" href="lwos_8h.html#a5fb5333b34abf3b33e9f45d70662c5d0">00157</a> <span class="preprocessor">#define task_sleep(ticks) { task_current-&gt;wake=task_tick+ticks,         \</span>
+<a name="l00158"></a>00158 <span class="preprocessor">      task_current-&gt;state=TASK_WAIT;     task_yield();   }</span>
+<a name="l00159"></a>00159 <span class="preprocessor"></span>
+<a name="l00161"></a>00161 <span class="keywordtype">void</span> <a class="code" href="lwos_8c.html#a2d5f6c88428ff65ce252e63964752e76" title="This function is usually called by main and forms the basic OS logic.">task_init</a>(<span class="keywordtype">void</span>);
+<a name="l00162"></a>00162 
+<a name="l00163"></a>00163 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -192,7 +191,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 4 2012 09:48:55 for Lightweight OS (LWOS) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 19 2012 22:30:11 for Lightweight OS (LWOS) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -15,7 +15,7 @@ struct \hyperlink{struct__task}{\-\_\-task}
 \subsection*{\-Defines}
 \begin{DoxyCompactItemize}
 \item 
-\#define \hyperlink{lwos_8h_a12e3ca8335f5d679110ad929d874a1be}{\-T\-A\-S\-K\-\_\-\-T\-A\-B\-L\-E}
+\#define \hyperlink{lwos_8h_a12e3ca8335f5d679110ad929d874a1be}{\-T\-A\-S\-K\-\_\-\-T\-A\-B\-L\-E}~\hyperlink{lwos_8h_af41b315a18a5782b8182db98ab85c5b7}{\-Task} \hyperlink{lwos_8h_a68b9925cf8d8141dbab91504b96f9ffd}{task\-\_\-table}\mbox{[}$\,$\mbox{]}= \{
 \begin{DoxyCompactList}\small\item\em \-Macro to create task table and other global vars. \end{DoxyCompactList}\item 
 \#define \hyperlink{lwos_8h_a82a4e5d2eb531e20baab4834d706dced}{\-T\-A\-S\-K\-\_\-\-D\-E\-F}(rdy, func)~\{ rdy, func, \-N\-U\-L\-L, \-N\-U\-L\-L, 0, 0, 0 \},
 \item 
@@ -60,12 +60,12 @@ void \hyperlink{lwos_8h_a2d5f6c88428ff65ce252e63964752e76}{task\-\_\-init} (void
 \subsection*{\-Variables}
 \begin{DoxyCompactItemize}
 \item 
-unsigned int \hyperlink{lwos_8h_aa18a9c2409250f9916f7fea243141ef1}{task\-\_\-tick}
-\item 
+int \hyperlink{lwos_8h_abbf01dbc8a3f47fd82f6c2afd53987ca}{task\-\_\-tick}
+\begin{DoxyCompactList}\small\item\em \-User defined tick counter (must be signed) \end{DoxyCompactList}\item 
 unsigned \hyperlink{lwos_8h_a48e853cd9284d45e9af1203802dad496}{task\-\_\-max}
 \begin{DoxyCompactList}\small\item\em \-Number of entries in the task table. \end{DoxyCompactList}\item 
 \hyperlink{lwos_8h_af41b315a18a5782b8182db98ab85c5b7}{\-Task} $\ast$ \hyperlink{lwos_8h_a3b6d2a771ddc14909fe529c79622be1f}{task\-\_\-current}
-\item 
+\begin{DoxyCompactList}\small\item\em \-Pointer to current task. \end{DoxyCompactList}\item 
 unsigned \hyperlink{lwos_8h_a7c6e943398bf748ba97367e4b250d56f}{task\-\_\-num}
 \begin{DoxyCompactList}\small\item\em \-Current running task (as an index into {\itshape task\-\_\-table\/}) \end{DoxyCompactList}\item 
 \hyperlink{lwos_8h_af41b315a18a5782b8182db98ab85c5b7}{\-Task} \hyperlink{lwos_8h_a68b9925cf8d8141dbab91504b96f9ffd}{task\-\_\-table} \mbox{[}$\,$\mbox{]}
@@ -166,12 +166,7 @@ unsigned \hyperlink{lwos_8h_a7c6e943398bf748ba97367e4b250d56f}{task\-\_\-num}
 \end{DoxyParams}
 \hypertarget{lwos_8h_a12e3ca8335f5d679110ad929d874a1be}{\index{lwos.\-h@{lwos.\-h}!\-T\-A\-S\-K\-\_\-\-T\-A\-B\-L\-E@{\-T\-A\-S\-K\-\_\-\-T\-A\-B\-L\-E}}
 \index{\-T\-A\-S\-K\-\_\-\-T\-A\-B\-L\-E@{\-T\-A\-S\-K\-\_\-\-T\-A\-B\-L\-E}!lwos.h@{lwos.\-h}}
-\subsubsection[{\-T\-A\-S\-K\-\_\-\-T\-A\-B\-L\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-T\-A\-S\-K\-\_\-\-T\-A\-B\-L\-E}}}\label{lwos_8h_a12e3ca8335f5d679110ad929d874a1be}
-{\bfseries \-Value\-:}
-\begin{DoxyCode}
-Task *task_current=NULL;                        \
-  Task task_table[]= {
-\end{DoxyCode}
+\subsubsection[{\-T\-A\-S\-K\-\_\-\-T\-A\-B\-L\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-T\-A\-S\-K\-\_\-\-T\-A\-B\-L\-E}~{\bf \-Task} {\bf task\-\_\-table}\mbox{[}$\,$\mbox{]}= \{}}\label{lwos_8h_a12e3ca8335f5d679110ad929d874a1be}
 
 
 \-Macro to create task table and other global vars. 
@@ -182,10 +177,7 @@ Task *task_current=NULL;                        \
 {\bfseries \-Value\-:}
 \begin{DoxyCode}
 };        \
-  unsigned task_max=sizeof(task_table)/sizeof(task_table[0]);   \
-  unsigned int task_tick=0; \
-  unsigned int task_num;    \
-  Task *task_current;       \
+  unsigned task_max=sizeof(task_table)/sizeof(task_table[0]);
 \end{DoxyCode}
 
 
@@ -308,6 +300,10 @@ Task *task_current=NULL;                        \
 \hypertarget{lwos_8h_a3b6d2a771ddc14909fe529c79622be1f}{\index{lwos.\-h@{lwos.\-h}!task\-\_\-current@{task\-\_\-current}}
 \index{task\-\_\-current@{task\-\_\-current}!lwos.h@{lwos.\-h}}
 \subsubsection[{task\-\_\-current}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Task}$\ast$ {\bf task\-\_\-current}}}\label{lwos_8h_a3b6d2a771ddc14909fe529c79622be1f}
+
+
+\-Pointer to current task. 
+
 \-Current running task (used by many macros; also passed as an argument to the task \hypertarget{lwos_8h_a48e853cd9284d45e9af1203802dad496}{\index{lwos.\-h@{lwos.\-h}!task\-\_\-max@{task\-\_\-max}}
 \index{task\-\_\-max@{task\-\_\-max}!lwos.h@{lwos.\-h}}
 \subsubsection[{task\-\_\-max}]{\setlength{\rightskip}{0pt plus 5cm}unsigned {\bf task\-\_\-max}}}\label{lwos_8h_a48e853cd9284d45e9af1203802dad496}
@@ -329,7 +325,11 @@ Task *task_current=NULL;                        \
 
 \-The table of tasks. 
 
-\hypertarget{lwos_8h_aa18a9c2409250f9916f7fea243141ef1}{\index{lwos.\-h@{lwos.\-h}!task\-\_\-tick@{task\-\_\-tick}}
+\hypertarget{lwos_8h_abbf01dbc8a3f47fd82f6c2afd53987ca}{\index{lwos.\-h@{lwos.\-h}!task\-\_\-tick@{task\-\_\-tick}}
 \index{task\-\_\-tick@{task\-\_\-tick}!lwos.h@{lwos.\-h}}
-\subsubsection[{task\-\_\-tick}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int {\bf task\-\_\-tick}}}\label{lwos_8h_aa18a9c2409250f9916f7fea243141ef1}
+\subsubsection[{task\-\_\-tick}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf task\-\_\-tick}}}\label{lwos_8h_abbf01dbc8a3f47fd82f6c2afd53987ca}
+
+
+\-User defined tick counter (must be signed) 
+
 \-This is set by (usually) one user task to represent time in some way (e.\-g., \# of seconds or milliseconds) 

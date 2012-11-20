@@ -85,8 +85,16 @@
  * then you do not have to update \a task_tick. More to follow
  */
 
+#include <stdlib.h> // get NULL
 #include "lwos.h"
 
+
+//! User defined tick counter (must be signed)
+int task_tick=0; 
+//! Current task number
+unsigned int task_num;    
+//! Pointer to current task
+Task *task_current=NULL;	 
 
 /*! \def LWOS_NOMAIN 
   \brief Define LWOS_NOMAIN if you want to supply your own main  and you are compiling lwos.c into your project
