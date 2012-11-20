@@ -85,11 +85,10 @@
  * then you do not have to update \a task_tick. More to follow
  */
 
-#include <stdlib.h> // get NULL
+#include "stdlib.h"  // for NULL
 #include "lwos.h"
 
 
-//! User defined tick counter (must be signed)
 int task_tick=0; 
 //! Current task number
 unsigned int task_num;    
@@ -111,6 +110,21 @@ int main(int argc, char *argv[])
 }
 #endif
 
+//! User time routine must call this to update task_tick, not update directly!
+void task_add_tick(int n)
+{
+  int i;
+  if (n==0) n=1;
+  task_tick+=n;
+  for (i=0;i<task_max;i++)
+  {
+    if (task_table[i].state==TASK_WAIT && task_table[i].wake!=0)
+    {
+      if (task_table[i].wake<=n) task_table[i].wake=0; else task_table[i].wake-=n;
+    }  
+  }
+  
+}
 
 //! This function is usually called by main and forms the basic OS logic
 void task_init(void)
@@ -125,15 +139,16 @@ void task_init(void)
       // if this task is waiting...
       if (task_table[taskindex].state==TASK_WAIT)
 	{
-	  // see if its "semaphore" is zero and if so kick start it
+ 	  // see if its "semaphore" is zero and if so kick start it
 	  if (task_table[taskindex].wait && !*(task_table[taskindex].wait))
 	    {
 	    task_table[taskindex].state=TASK_READY;
 	    }
 	  
 	  // See if its timer has expired, if so kick start it
-	  if (task_table[taskindex].wake && 
-	      task_table[taskindex].wake<=task_tick)
+	  // note we used to allow a timer and a sem, but not
+	  // since the change in what wait==0 means!
+	  if (task_table[taskindex].wake <=0 && !task_table[taskindex].wait)
 	    {
 	      task_table[taskindex].state=TASK_READY;
 	      task_table[taskindex].wake=0;
@@ -161,3 +176,4 @@ void task_init(void)
       taskindex=rv==0?rv:rv-1;
     }
 }
+

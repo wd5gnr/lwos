@@ -27,7 +27,7 @@ int task0(Task *tcb)
   time(&t1);
   // If in a new second, update everything
   if (t1!=*t) {
-    task_tick++;
+    task_add_tick(1);
     *t=t1;
   }
   // got to the next priority level

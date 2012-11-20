@@ -34,6 +34,10 @@
 #ifndef __LWOS_H
 #define __LWOS_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #ifndef TASK_NO_SETJMP
 #include <setjmp.h>
 #endif
@@ -73,7 +77,7 @@ typedef struct _task
 //! If waiting for a semaphore, point to it
   TASKWAIT_t *wait;  
 //! If waiting for a tick count, here it is
-  unsigned wake;    
+  int wake;    
 #ifndef TASK_NO_SETJMP
 //! If \a TASK_NO_SETJMP is not defined use setjmp for embedded yield
   jmp_buf yieldbuf;
@@ -109,7 +113,6 @@ extern Task task_table[];
 //! Macro to end the task table and define some more globals
 #define TASK_TABLE_END };	  \
   unsigned task_max=sizeof(task_table)/sizeof(task_table[0]);	
-
 
 
 #ifndef TASK_NO_SETJMP
@@ -154,10 +157,20 @@ extern Task task_table[];
 
 //! Sleep for given tick count
 //! \param ticks - Number of ticks to wait
-#define task_sleep(ticks) { task_current->wake=task_tick+ticks,		\
+#define task_sleep(ticks) { task_current->wake=ticks,		\
       task_current->state=TASK_WAIT;	 task_yield();	 }
+
+
+//! Add n to the task_tick count
+//! User code must call this directly and not update task_tick directly
+//! If n==0 it is treated as 
+void task_add_tick(int n);
 
 //! Start LWOS -- typically called from default main
 void task_init(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
